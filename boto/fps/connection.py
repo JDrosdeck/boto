@@ -113,7 +113,7 @@ class FPSConnection(AWSQueryConnection):
         else:
             raise FPSResponseError(response.status, response.reason, body)
 
-    def make_marketplace_registration_url(self, returnURL, piplineName, maxFixedFee=0.0, maxVariableFee=0.0, recipientPaysFee='True', **params):  
+    def make_marketplace_registration_url(self, returnURL, pipelineName, maxFixedFee=0.0, maxVariableFee=0.0, recipientPaysFee=True, **params):  
         """
         Generate the URL with the signature required for signing up a recipient
         """
@@ -129,10 +129,9 @@ class FPSConnection(AWSQueryConnection):
         params['pipelineName'] = str(pipelineName)
         params['maxFixedFee'] = str(maxFixedFee)
         params['maxVariableFee'] = str(maxVariableFee)
-        params['recipientPaysFee'] - str(recipientPaysFee)
+        params['recipientPaysFee'] = str(recipientPaysFee)
         params["signatureMethod"] = 'HmacSHA256'
         params["signatureVersion"] = '2'
-        params["transactionAmount"] = transactionAmount
 
         if(not params.has_key('callerReference')):
             params['callerReference'] = str(uuid.uuid4())
