@@ -322,7 +322,8 @@ class FPSConnection(AWSQueryConnection):
         params['CallerReference'] = callerReference
         params['TransactionId'] = transactionId
         if(refundAmount != None):
-            params['RefundAmount'] = refundAmount
+            params['RefundAmout.CurrencyCode'] = 'USD'
+            params['RefundAmount.Amount'] = refundAmount
         if(callerDescription != None):
             params['CallerDescription'] = callerDescription
         
