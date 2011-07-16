@@ -314,13 +314,15 @@ class FPSConnection(AWSQueryConnection):
         else:
             raise FPSResponseError(response.status, response.reason, body)
     
-    def refund(self, callerReference, transactionId, refundAmount=None, callerDescription=None):
+    def refund(self, callerReference, transactionId, reund_sender_id, caller_token_id, refundAmount=None, callerDescription=None):
         """
         Refund a transaction. This refunds the full amount by default unless 'refundAmount' is specified.
         """
         params = {}
         params['CallerReference'] = callerReference
         params['TransactionId'] = transactionId
+        params['RefundSenderTokenId'] = refund_sender_id
+        params['CallerTokenId'] = caller_token_id
         if(refundAmount != None):
             params['RefundAmout.CurrencyCode'] = 'USD'
             params['RefundAmount.Amount'] = refundAmount
